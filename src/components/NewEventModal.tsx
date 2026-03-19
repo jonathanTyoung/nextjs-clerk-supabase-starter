@@ -98,20 +98,22 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
     onClose()
   }
 
+  const inputClass = "w-full border border-[#1e1e4a] rounded-sm px-3 py-2 text-sm text-[#c8d0f0] bg-[#080812] placeholder:text-[#4a5580] focus:outline-none focus:ring-2 focus:ring-[#00fff9]/50 focus:border-[#00fff9]"
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose()
       }}
     >
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+      <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm shadow-2xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-base font-medium text-gray-900">New Event</h2>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1e1e4a]">
+          <h2 className="text-base font-semibold text-[#c8d0f0] tracking-wide uppercase">New Event</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors text-lg leading-none"
+            className="text-[#4a5580] hover:text-[#00fff9] transition-colors text-lg leading-none"
           >
             ✕
           </button>
@@ -121,13 +123,13 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
         <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
           {/* Client */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Client <span className="text-gray-400 font-normal">(optional)</span>
+            <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+              Client <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
             </label>
             <select
               value={form.client_id}
               onChange={(e) => set('client_id', e.target.value)}
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             >
               <option value="">— No client —</option>
               {clients.map((c) => (
@@ -140,8 +142,8 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Event title <span className="text-red-400">*</span>
+            <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+              Event title <span className="text-[#ff2d78]">*</span>
             </label>
             <input
               type="text"
@@ -149,21 +151,21 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
               value={form.title}
               onChange={(e) => set('title', e.target.value)}
               placeholder="e.g. Smith Wedding"
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             />
           </div>
 
           {/* Event type + Status (2-col) */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Event type <span className="text-red-400">*</span>
+              <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+                Event type <span className="text-[#ff2d78]">*</span>
               </label>
               <select
                 required
                 value={form.event_type}
                 onChange={(e) => set('event_type', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               >
                 <option value="">Select type</option>
                 {EVENT_TYPES.map((t) => (
@@ -174,11 +176,11 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">Status</label>
               <select
                 value={form.status}
                 onChange={(e) => set('status', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               >
                 {STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>
@@ -192,34 +194,34 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
           {/* Event date + End date (2-col) */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Event date <span className="text-red-400">*</span>
+              <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+                Event date <span className="text-[#ff2d78]">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={form.event_date}
                 onChange={(e) => set('event_date', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                End date <span className="text-gray-400 font-normal">(optional)</span>
+              <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+                End date <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
               </label>
               <input
                 type="date"
                 value={form.end_date}
                 onChange={(e) => set('end_date', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Location */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Location <span className="text-red-400">*</span>
+            <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+              Location <span className="text-[#ff2d78]">*</span>
             </label>
             <input
               type="text"
@@ -227,65 +229,65 @@ export default function NewEventModal({ onClose, onCreated }: Props) {
               value={form.location}
               onChange={(e) => set('location', e.target.value)}
               placeholder="Venue name or address"
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             />
           </div>
 
           {/* Contracted start + end (2-col) */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Contracted start <span className="text-gray-400 font-normal">(optional)</span>
+              <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+                Contracted start <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
               </label>
               <input
                 type="time"
                 value={form.contracted_start}
                 onChange={(e) => set('contracted_start', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Contracted end <span className="text-gray-400 font-normal">(optional)</span>
+              <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+                Contracted end <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
               </label>
               <input
                 type="time"
                 value={form.contracted_end}
                 onChange={(e) => set('contracted_end', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Notes <span className="text-gray-400 font-normal">(optional)</span>
+            <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">
+              Notes <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
             </label>
             <textarea
               rows={3}
               value={form.notes}
               onChange={(e) => set('notes', e.target.value)}
               placeholder="Any initial notes..."
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className={`${inputClass} resize-none`}
             />
           </div>
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && <p className="text-sm text-[#ff2d78]">{error}</p>}
 
           {/* Actions */}
           <div className="flex justify-end gap-3 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="px-4 py-2 text-sm text-[#4a5580] hover:text-[#c8d0f0] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              className="px-4 py-2 text-sm bg-[#00fff9] text-[#080812] font-semibold rounded-sm hover:bg-[#00e0e0] disabled:opacity-50 transition-colors tracking-wide"
             >
               {submitting ? 'Creating...' : 'Create event'}
             </button>

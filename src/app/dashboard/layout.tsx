@@ -37,21 +37,21 @@ export default function DashboardLayout({
   const { user } = useUser()
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-[#080812]">
       {/* Sidebar */}
-      <div className="w-52 bg-white border-r border-gray-100 flex flex-col flex-shrink-0">
+      <div className="w-52 bg-[#0d0d24] border-r border-[#1e1e4a] flex flex-col flex-shrink-0">
 
         {/* Logo */}
-        <div className="px-4 py-5 border-b border-gray-100">
-          <div className="text-sm font-medium text-gray-900">HighTone</div>
-          <div className="text-xs text-gray-400 mt-0.5">Event Assistant</div>
+        <div className="px-4 py-5 border-b border-[#1e1e4a]">
+          <div className="text-sm font-semibold text-[#00fff9] tracking-widest uppercase">HighTone</div>
+          <div className="text-xs text-[#4a5580] mt-0.5 tracking-wide">Event Assistant</div>
         </div>
 
         {/* Nav */}
         <nav className="flex-1 px-2 py-3 space-y-4">
           {navigation.map((group) => (
             <div key={group.section}>
-              <div className="px-2 mb-1 text-xs font-medium text-gray-400 uppercase tracking-wider">
+              <div className="px-2 mb-1 text-xs font-medium text-[#4a5580] uppercase tracking-widest">
                 {group.section}
               </div>
               {group.items.map((item) => {
@@ -60,10 +60,10 @@ export default function DashboardLayout({
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`flex items-center px-3 py-2 text-sm rounded-md mb-0.5 transition-colors ${
+                    className={`flex items-center px-3 py-2 text-sm rounded-sm mb-0.5 transition-colors ${
                       isActive
-                        ? 'bg-blue-50 text-blue-700 font-medium border-l-2 border-blue-600'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        ? 'bg-[#00fff9]/10 text-[#00fff9] font-medium border-l-2 border-[#00fff9]'
+                        : 'text-[#8890b0] hover:bg-[#1a1a3e] hover:text-[#c8d0f0]'
                     }`}
                   >
                     {item.name}
@@ -75,14 +75,14 @@ export default function DashboardLayout({
         </nav>
 
         {/* User */}
-        <div className="px-4 py-3 border-t border-gray-100">
+        <div className="px-4 py-3 border-t border-[#1e1e4a]">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-xs font-medium text-blue-700">
+            <div className="w-7 h-7 rounded-full bg-[#00fff9]/20 border border-[#00fff9]/30 flex items-center justify-center text-xs font-medium text-[#00fff9]">
               {user?.firstName?.[0]}{user?.lastName?.[0]}
             </div>
             <div>
-              <div className="text-xs font-medium text-gray-900">{user?.firstName}</div>
-              <div className="text-xs text-gray-400">Admin</div>
+              <div className="text-xs font-medium text-[#c8d0f0]">{user?.firstName}</div>
+              <div className="text-xs text-[#4a5580]">Admin</div>
             </div>
           </div>
         </div>

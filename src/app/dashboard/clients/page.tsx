@@ -44,48 +44,48 @@ export default function ClientsPage() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg font-medium text-gray-900">Clients</h1>
-          <p className="text-sm text-gray-400 mt-0.5">All HighTone clients</p>
+          <h1 className="text-lg font-semibold text-[#c8d0f0] tracking-wide uppercase">Clients</h1>
+          <p className="text-sm text-[#4a5580] mt-0.5">All HighTone clients</p>
         </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          className="bg-[#00fff9] text-[#080812] font-semibold text-sm px-4 py-2 rounded-sm hover:bg-[#00e0e0] transition-colors tracking-wide"
         >
           + Add Client
         </button>
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           Loading clients...
         </div>
       ) : clients.length === 0 ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           No clients yet.
         </div>
       ) : (
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Name</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Email</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Phone</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Notes</th>
+              <tr className="border-b border-[#1e1e4a]">
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Name</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Email</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Phone</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Notes</th>
                 <th className="px-5 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[#1e1e4a]">
               {clients.map((client) => (
-                <tr key={client.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-gray-900">{client.name}</td>
-                  <td className="px-5 py-3 text-gray-600">{client.email}</td>
-                  <td className="px-5 py-3 text-gray-500">{client.phone ?? '—'}</td>
-                  <td className="px-5 py-3 text-gray-500 max-w-xs truncate">{client.notes ?? '—'}</td>
+                <tr key={client.id} className="hover:bg-[#1a1a3e] transition-colors">
+                  <td className="px-5 py-3 font-medium text-[#c8d0f0]">{client.name}</td>
+                  <td className="px-5 py-3 text-[#8890b0]">{client.email}</td>
+                  <td className="px-5 py-3 text-[#4a5580]">{client.phone ?? '—'}</td>
+                  <td className="px-5 py-3 text-[#4a5580] max-w-xs truncate">{client.notes ?? '—'}</td>
                   <td className="px-5 py-3 text-right">
                     <button
                       onClick={() => setEditing(client)}
-                      className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                      className="text-sm text-[#00fff9] hover:text-[#00e0e0] transition-colors"
                     >
                       Edit
                     </button>

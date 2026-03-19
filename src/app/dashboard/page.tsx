@@ -72,8 +72,8 @@ export default function CalendarPage() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg font-medium text-gray-900">Calendar</h1>
-          <p className="text-sm text-gray-400 mt-0.5">All HighTone events</p>
+          <h1 className="text-lg font-semibold text-[#c8d0f0] tracking-wide uppercase">Calendar</h1>
+          <p className="text-sm text-[#4a5580] mt-0.5">All HighTone events</p>
         </div>
         <div className="flex items-center gap-4">
           {/* Legend */}
@@ -81,13 +81,13 @@ export default function CalendarPage() {
             {Object.entries(statusColors).map(([status, color]) => (
               <div key={status} className="flex items-center gap-1.5">
                 <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: color }} />
-                <span className="text-xs text-gray-500 capitalize">{status}</span>
+                <span className="text-xs text-[#4a5580] capitalize">{status}</span>
               </div>
             ))}
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            className="bg-[#00fff9] text-[#080812] font-semibold text-sm px-4 py-2 rounded-sm hover:bg-[#00e0e0] transition-colors tracking-wide"
           >
             + New Event
           </button>
@@ -95,11 +95,11 @@ export default function CalendarPage() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-96 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-96 text-sm text-[#4a5580]">
           Loading events...
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-100 p-4">
+        <div className="bg-[#0d0d24] rounded-sm border border-[#1e1e4a] p-4">
           <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"

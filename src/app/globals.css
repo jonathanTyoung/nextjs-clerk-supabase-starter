@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #080812;
+  --foreground: #c8d0f0;
 }
 
 @theme inline {
@@ -10,13 +10,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -29,6 +22,143 @@ button, a, [role="button"], select {
   cursor: pointer;
 }
 
+/* Global input / select / textarea dark styling */
+input,
+select,
+textarea {
+  background-color: #080812;
+  color: #c8d0f0;
+  border-color: #1e1e4a;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #4a5580;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d24;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e4a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00fff9;
+}
+
+/* FullCalendar cyberpunk overrides */
+.fc {
+  --fc-border-color: #1e1e4a;
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: #0d0d24;
+  --fc-neutral-text-color: #c8d0f0;
+  --fc-today-bg-color: rgba(0, 255, 249, 0.06);
+  --fc-event-bg-color: #185FA5;
+  --fc-event-border-color: #185FA5;
+  --fc-event-text-color: #fff;
+  --fc-button-bg-color: #0d0d24;
+  --fc-button-border-color: #1e1e4a;
+  --fc-button-hover-bg-color: #1a1a3e;
+  --fc-button-hover-border-color: #00fff9;
+  --fc-button-active-bg-color: #00fff9;
+  --fc-button-active-border-color: #00fff9;
+  --fc-button-text-color: #c8d0f0;
+  color: #c8d0f0;
+}
+
+.fc .fc-button {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #00fff9;
+  border-color: #00fff9;
+  color: #080812;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #c8d0f0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.fc .fc-col-header-cell {
+  background: #0d0d24;
+  border-color: #1e1e4a;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: #00fff9;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.fc .fc-daygrid-day {
+  background: #0d0d24;
+}
+
+.fc .fc-daygrid-day:hover {
+  background: #131336;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #8890b0;
+  font-size: 0.75rem;
+  text-decoration: none;
+  padding: 4px 6px;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  color: #00fff9;
+  font-weight: 700;
+}
+
+.fc .fc-day-today {
+  background: rgba(0, 255, 249, 0.06) !important;
+}
+
+.fc .fc-day-other .fc-daygrid-day-number {
+  color: #2a2a5a;
+}
+
+.fc .fc-scrollgrid {
+  border-color: #1e1e4a;
+}
+
+.fc .fc-scrollgrid td,
+.fc .fc-scrollgrid th {
+  border-color: #1e1e4a;
+}
+
 .fc-event {
   cursor: pointer;
+  border-radius: 3px !important;
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
+}
+
+.fc .fc-daygrid-event {
+  border-radius: 3px;
+}
+
+.fc .fc-event-title {
+  font-weight: 500;
 }

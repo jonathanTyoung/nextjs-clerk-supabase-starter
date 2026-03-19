@@ -72,13 +72,13 @@ export default function PayrollPage() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg font-medium text-gray-900">Payroll</h1>
-          <p className="text-sm text-gray-400 mt-0.5">Track payments to staff</p>
+          <h1 className="text-lg font-semibold text-[#c8d0f0] tracking-wide uppercase">Payroll</h1>
+          <p className="text-sm text-[#4a5580] mt-0.5">Track payments to staff</p>
         </div>
         {totalPending > 0 && (
           <div className="text-right">
-            <p className="text-xs text-gray-400">Pending total</p>
-            <p className="text-lg font-semibold text-gray-900">${totalPending.toLocaleString()}</p>
+            <p className="text-xs text-[#4a5580]">Pending total</p>
+            <p className="text-lg font-semibold text-[#00fff9]">${totalPending.toLocaleString()}</p>
           </div>
         )}
       </div>
@@ -91,8 +91,8 @@ export default function PayrollPage() {
             onClick={() => setFilter(f)}
             className={`px-3 py-1 rounded-full text-xs font-medium capitalize transition-colors ${
               filter === f
-                ? 'bg-gray-900 text-white'
-                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                ? 'bg-[#00fff9] text-[#080812]'
+                : 'bg-[#131336] text-[#4a5580] hover:bg-[#1a1a3e]'
             }`}
           >
             {f}
@@ -101,54 +101,54 @@ export default function PayrollPage() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           Loading payroll...
         </div>
       ) : filtered.length === 0 ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           No entries found.
         </div>
       ) : (
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Employee</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Event</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Amount</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Added</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Sent to Josh</th>
+              <tr className="border-b border-[#1e1e4a]">
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Employee</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Event</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Amount</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Added</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Sent to Josh</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[#1e1e4a]">
               {filtered.map((entry) => (
-                <tr key={entry.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-gray-900">
+                <tr key={entry.id} className="hover:bg-[#1a1a3e] transition-colors">
+                  <td className="px-5 py-3 font-medium text-[#c8d0f0]">
                     {entry.employees?.name ?? 'Misc'}
                   </td>
-                  <td className="px-5 py-3 text-gray-600">
+                  <td className="px-5 py-3 text-[#8890b0]">
                     {entry.events ? (
                       <div>
                         <p>{entry.events.title}</p>
-                        <p className="text-xs text-gray-400">{formatDate(entry.events.event_date)}</p>
+                        <p className="text-xs text-[#4a5580]">{formatDate(entry.events.event_date)}</p>
                       </div>
                     ) : '—'}
                   </td>
-                  <td className="px-5 py-3 font-medium text-gray-900">
+                  <td className="px-5 py-3 font-medium text-[#c8d0f0]">
                     ${entry.amount.toLocaleString()}
                   </td>
-                  <td className="px-5 py-3 text-gray-500">
+                  <td className="px-5 py-3 text-[#4a5580]">
                     {formatDate(entry.created_at)}
                   </td>
                   <td className="px-5 py-3">
                     <button
                       onClick={() => toggleSent(entry)}
                       className={`relative inline-flex h-5 w-9 rounded-full transition-colors ${
-                        entry.sent_to_josh ? 'bg-blue-600' : 'bg-gray-200'
+                        entry.sent_to_josh ? 'bg-[#00fff9]' : 'bg-[#1e1e4a]'
                       }`}
                     >
                       <span
-                        className={`inline-block h-4 w-4 rounded-full bg-white shadow transform transition-transform mt-0.5 ${
+                        className={`inline-block h-4 w-4 rounded-full bg-[#080812] shadow transform transition-transform mt-0.5 ${
                           entry.sent_to_josh ? 'translate-x-4' : 'translate-x-0.5'
                         }`}
                       />

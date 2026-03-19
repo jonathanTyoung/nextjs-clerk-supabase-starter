@@ -44,13 +44,13 @@ export default function ContractSection({ eventId }: Props) {
   }
 
   return (
-    <div className="bg-white border border-gray-100 rounded-xl px-5 py-4">
+    <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm px-5 py-4">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-sm font-medium text-gray-900">Contract</p>
+        <p className="text-sm font-semibold text-[#c8d0f0] uppercase tracking-wide">Contract</p>
         {!loading && (
           <button
             onClick={() => router.push(`/dashboard/events/${eventId}/contract`)}
-            className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+            className="text-sm text-[#00fff9] hover:text-[#00e0e0] transition-colors"
           >
             {contract ? 'Edit' : '+ Create'}
           </button>
@@ -58,33 +58,33 @@ export default function ContractSection({ eventId }: Props) {
       </div>
 
       {loading ? (
-        <p className="text-xs text-gray-400">Loading...</p>
+        <p className="text-xs text-[#4a5580]">Loading...</p>
       ) : !contract ? (
-        <p className="text-sm text-gray-400">No contract yet.</p>
+        <p className="text-sm text-[#4a5580]">No contract yet.</p>
       ) : (
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Package</span>
-            <span className="text-gray-900 font-medium">{contract.package}</span>
+            <span className="text-[#4a5580]">Package</span>
+            <span className="text-[#c8d0f0] font-medium">{contract.package}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Total</span>
-            <span className="text-gray-900 font-medium">${contract.total_price.toLocaleString()}</span>
+            <span className="text-[#4a5580]">Total</span>
+            <span className="text-[#c8d0f0] font-medium">${contract.total_price.toLocaleString()}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Balance due</span>
-            <span className="text-gray-900 font-medium">${contract.balance_due.toLocaleString()}</span>
+            <span className="text-[#4a5580]">Balance due</span>
+            <span className="text-[#c8d0f0] font-medium">${contract.balance_due.toLocaleString()}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Deposit</span>
-            <span className={contract.deposit_paid ? 'text-green-600 font-medium' : 'text-amber-600 font-medium'}>
+            <span className="text-[#4a5580]">Deposit</span>
+            <span className={contract.deposit_paid ? 'text-[#7dd44a] font-medium' : 'text-[#ffa832] font-medium'}>
               {contract.deposit_paid ? 'Paid' : 'Unpaid'}
             </span>
           </div>
           <div className="pt-2">
             <button
               onClick={copyLink}
-              className="text-xs text-blue-600 hover:text-blue-800 transition-colors"
+              className="text-xs text-[#00fff9] hover:text-[#00e0e0] transition-colors"
             >
               {copied ? 'Link copied!' : 'Copy client link'}
             </button>

@@ -46,52 +46,52 @@ export default function EmployeesPage() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg font-medium text-gray-900">Employees</h1>
-          <p className="text-sm text-gray-400 mt-0.5">DJs, photo booth, and A/V staff</p>
+          <h1 className="text-lg font-semibold text-[#c8d0f0] tracking-wide uppercase">Employees</h1>
+          <p className="text-sm text-[#4a5580] mt-0.5">DJs, photo booth, and A/V staff</p>
         </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          className="bg-[#00fff9] text-[#080812] font-semibold text-sm px-4 py-2 rounded-sm hover:bg-[#00e0e0] transition-colors tracking-wide"
         >
           + Add Employee
         </button>
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           Loading employees...
         </div>
       ) : employees.length === 0 ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           No employees yet.
         </div>
       ) : (
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Name</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Role</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Email</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Phone</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Pay rate</th>
+              <tr className="border-b border-[#1e1e4a]">
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Name</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Role</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Email</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Phone</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Pay rate</th>
                 <th className="px-5 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[#1e1e4a]">
               {employees.map((emp) => (
-                <tr key={emp.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-gray-900">{emp.name}</td>
-                  <td className="px-5 py-3 text-gray-600">{emp.role}</td>
-                  <td className="px-5 py-3 text-gray-600">{emp.email}</td>
-                  <td className="px-5 py-3 text-gray-500">{emp.phone ?? '—'}</td>
-                  <td className="px-5 py-3 text-gray-500">
+                <tr key={emp.id} className="hover:bg-[#1a1a3e] transition-colors">
+                  <td className="px-5 py-3 font-medium text-[#c8d0f0]">{emp.name}</td>
+                  <td className="px-5 py-3 text-[#8890b0]">{emp.role}</td>
+                  <td className="px-5 py-3 text-[#8890b0]">{emp.email}</td>
+                  <td className="px-5 py-3 text-[#4a5580]">{emp.phone ?? '—'}</td>
+                  <td className="px-5 py-3 text-[#4a5580]">
                     {emp.pay_rate != null ? `$${emp.pay_rate}` : '—'}
                   </td>
                   <td className="px-5 py-3 text-right">
                     <button
                       onClick={() => setEditing(emp)}
-                      className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                      className="text-sm text-[#00fff9] hover:text-[#00e0e0] transition-colors"
                     >
                       Edit
                     </button>

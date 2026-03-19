@@ -78,26 +78,28 @@ export default function PayrollSection({ eventId }: Props) {
     setRefreshTick((t) => t + 1)
   }
 
+  const inputClass = "w-full border border-[#1e1e4a] rounded-sm px-3 py-2 text-sm text-[#c8d0f0] bg-[#080812] focus:outline-none focus:ring-2 focus:ring-[#00fff9]/50 focus:border-[#00fff9]"
+
   return (
-    <div className="bg-white border border-gray-100 rounded-xl px-5 py-4">
+    <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm px-5 py-4">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-sm font-medium text-gray-900">Payroll</p>
+        <p className="text-sm font-semibold text-[#c8d0f0] uppercase tracking-wide">Payroll</p>
         <button
           onClick={() => setShowAdd((v) => !v)}
-          className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+          className="text-sm text-[#00fff9] hover:text-[#00e0e0] transition-colors"
         >
           {showAdd ? 'Cancel' : '+ Add'}
         </button>
       </div>
 
       {showAdd && (
-        <form onSubmit={handleAdd} className="mb-4 p-4 bg-gray-50 rounded-lg space-y-3">
+        <form onSubmit={handleAdd} className="mb-4 p-4 bg-[#080812] border border-[#1e1e4a] rounded-sm space-y-3">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Employee</label>
+            <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">Employee</label>
             <select
               value={selectedEmployee}
               onChange={(e) => setSelectedEmployee(e.target.value)}
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             >
               <option value="">— Misc / no employee —</option>
               {employees.map((emp) => (
@@ -106,9 +108,9 @@ export default function PayrollSection({ eventId }: Props) {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Amount</label>
+            <label className="block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-1">Amount</label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#4a5580]">$</span>
               <input
                 type="number"
                 required
@@ -116,16 +118,16 @@ export default function PayrollSection({ eventId }: Props) {
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full border border-gray-200 rounded-md pl-7 pr-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`${inputClass} pl-7`}
               />
             </div>
           </div>
-          {addError && <p className="text-xs text-red-500">{addError}</p>}
+          {addError && <p className="text-xs text-[#ff2d78]">{addError}</p>}
           <div className="flex justify-end">
             <button
               type="submit"
               disabled={submitting}
-              className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              className="px-3 py-1.5 text-sm bg-[#00fff9] text-[#080812] font-semibold rounded-sm hover:bg-[#00e0e0] disabled:opacity-50 transition-colors"
             >
               {submitting ? 'Adding...' : 'Add entry'}
             </button>
@@ -134,22 +136,22 @@ export default function PayrollSection({ eventId }: Props) {
       )}
 
       {entries.length === 0 ? (
-        <p className="text-sm text-gray-400">No payroll entries yet.</p>
+        <p className="text-sm text-[#4a5580]">No payroll entries yet.</p>
       ) : (
         <div className="space-y-2">
           {entries.map((entry) => (
-            <div key={entry.id} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+            <div key={entry.id} className="flex items-center justify-between py-2 border-b border-[#1e1e4a] last:border-0">
               <div>
-                <p className="text-sm font-medium text-gray-900">{entry.employees?.name ?? 'Misc'}</p>
-                <p className="text-xs text-gray-500">${entry.amount.toLocaleString()}</p>
+                <p className="text-sm font-medium text-[#c8d0f0]">{entry.employees?.name ?? 'Misc'}</p>
+                <p className="text-xs text-[#4a5580]">${entry.amount.toLocaleString()}</p>
               </div>
               <div className="flex items-center gap-3">
-                <span className={`text-xs font-medium ${entry.sent_to_josh ? 'text-green-600' : 'text-gray-400'}`}>
+                <span className={`text-xs font-medium ${entry.sent_to_josh ? 'text-[#7dd44a]' : 'text-[#4a5580]'}`}>
                   {entry.sent_to_josh ? 'Sent to Josh' : 'Pending'}
                 </span>
                 <button
                   onClick={() => handleRemove(entry.id)}
-                  className="text-xs text-gray-400 hover:text-red-500 transition-colors"
+                  className="text-xs text-[#4a5580] hover:text-[#ff2d78] transition-colors"
                 >
                   Remove
                 </button>

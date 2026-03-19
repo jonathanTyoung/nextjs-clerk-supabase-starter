@@ -16,13 +16,13 @@ type Event = {
 }
 
 const statusColors: Record<string, { bg: string; text: string }> = {
-  inquiry:    { bg: '#FEE2E2', text: '#E24B4A' },
-  tentative:  { bg: '#FEF3C7', text: '#BA7517' },
-  contracted: { bg: '#DBEAFE', text: '#185FA5' },
-  staffed:    { bg: '#DCFCE7', text: '#639922' },
-  complete:   { bg: '#F3F4F6', text: '#888780' },
-  expired:    { bg: '#F3F4F6', text: '#B4B2A9' },
-  cancelled:  { bg: '#F3F4F6', text: '#B4B2A9' },
+  inquiry:    { bg: 'rgba(226, 75, 74, 0.18)',   text: '#ff6b6a' },
+  tentative:  { bg: 'rgba(186, 117, 23, 0.18)',  text: '#ffa832' },
+  contracted: { bg: 'rgba(24, 95, 165, 0.18)',   text: '#5ba3f5' },
+  staffed:    { bg: 'rgba(99, 153, 34, 0.18)',   text: '#7dd44a' },
+  complete:   { bg: 'rgba(136, 135, 128, 0.18)', text: '#a0a09a' },
+  expired:    { bg: 'rgba(136, 135, 128, 0.18)', text: '#6b7080' },
+  cancelled:  { bg: 'rgba(136, 135, 128, 0.18)', text: '#6b7080' },
 }
 
 const ALL_STATUSES = ['inquiry', 'tentative', 'contracted', 'staffed', 'complete', 'cancelled', 'expired']
@@ -68,12 +68,12 @@ export default function EventsPage() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg font-medium text-gray-900">Events</h1>
-          <p className="text-sm text-gray-400 mt-0.5">All HighTone events</p>
+          <h1 className="text-lg font-semibold text-[#c8d0f0] tracking-wide uppercase">Events</h1>
+          <p className="text-sm text-[#4a5580] mt-0.5">All HighTone events</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          className="bg-[#00fff9] text-[#080812] font-semibold text-sm px-4 py-2 rounded-sm hover:bg-[#00e0e0] transition-colors tracking-wide"
         >
           + New Event
         </button>
@@ -85,8 +85,8 @@ export default function EventsPage() {
           onClick={() => setStatusFilter(null)}
           className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
             statusFilter === null
-              ? 'bg-gray-900 text-white'
-              : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+              ? 'bg-[#00fff9] text-[#080812]'
+              : 'bg-[#131336] text-[#4a5580] hover:bg-[#1a1a3e]'
           }`}
         >
           All
@@ -114,40 +114,40 @@ export default function EventsPage() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           Loading events...
         </div>
       ) : filtered.length === 0 ? (
-        <div className="flex items-center justify-center h-64 text-sm text-gray-400">
+        <div className="flex items-center justify-center h-64 text-sm text-[#4a5580]">
           No events found.
         </div>
       ) : (
-        <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
+        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Event</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Date</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Location</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Status</th>
-                <th className="text-left px-5 py-3 text-xs font-medium text-gray-400 uppercase tracking-wide">Staffing</th>
+              <tr className="border-b border-[#1e1e4a]">
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Event</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Date</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Location</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Status</th>
+                <th className="text-left px-5 py-3 text-xs font-medium text-[#00fff9] uppercase tracking-widest">Staffing</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-[#1e1e4a]">
               {filtered.map((event) => {
                 const style = statusColors[event.status] ?? statusColors.complete
                 return (
                   <tr
                     key={event.id}
                     onClick={() => router.push(`/dashboard/events/${event.id}`)}
-                    className="hover:bg-gray-50 transition-colors cursor-pointer"
+                    className="hover:bg-[#1a1a3e] transition-colors cursor-pointer"
                   >
                     <td className="px-5 py-3">
-                      <p className="font-medium text-gray-900">{event.title}</p>
-                      <p className="text-xs text-gray-400">{event.event_type}</p>
+                      <p className="font-medium text-[#c8d0f0]">{event.title}</p>
+                      <p className="text-xs text-[#4a5580]">{event.event_type}</p>
                     </td>
-                    <td className="px-5 py-3 text-gray-600">{formatDate(event.event_date)}</td>
-                    <td className="px-5 py-3 text-gray-600">{event.location}</td>
+                    <td className="px-5 py-3 text-[#8890b0]">{formatDate(event.event_date)}</td>
+                    <td className="px-5 py-3 text-[#8890b0]">{event.location}</td>
                     <td className="px-5 py-3">
                       <span
                         className="text-xs font-medium px-2 py-0.5 rounded-full capitalize"
@@ -156,7 +156,7 @@ export default function EventsPage() {
                         {event.status}
                       </span>
                     </td>
-                    <td className="px-5 py-3 text-gray-500 capitalize">{event.staffing_status}</td>
+                    <td className="px-5 py-3 text-[#4a5580] capitalize">{event.staffing_status}</td>
                   </tr>
                 )
               })}
