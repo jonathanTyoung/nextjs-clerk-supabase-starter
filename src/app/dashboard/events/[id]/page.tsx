@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase'
 import StaffSection from '@/components/StaffSection'
 import ContractSection from '@/components/ContractSection'
 import PayrollSection from '@/components/PayrollSection'
+import TimelineSection from '@/components/TimelineSection'
 
 const statusColors: Record<string, { bg: string; text: string }> = {
   inquiry:    { bg: 'rgba(226, 75, 74, 0.18)',   text: '#ff6b6a' },
@@ -199,10 +200,7 @@ export default function EventDetailPage() {
       <div className="mt-4 grid grid-cols-3 gap-4">
         <ContractSection eventId={event.id} />
         <PayrollSection eventId={event.id} />
-        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm px-5 py-4">
-          <p className="text-sm font-medium text-[#c8d0f0] mb-1">Timeline</p>
-          <p className="text-xs text-[#4a5580]">Coming soon</p>
-        </div>
+        <TimelineSection eventId={event.id} />
       </div>
     </div>
   )
