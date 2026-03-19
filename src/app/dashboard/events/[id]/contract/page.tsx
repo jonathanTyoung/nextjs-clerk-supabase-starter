@@ -10,6 +10,9 @@ type Addon = {
   price: string
 }
 
+const inputClass = "w-full border border-[#1e1e4a] rounded-sm px-3 py-2 text-sm text-[#c8d0f0] bg-[#080812] placeholder:text-[#4a5580] focus:outline-none focus:ring-2 focus:ring-[#00fff9]/50 focus:border-[#00fff9]"
+const labelClass = "block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-2"
+
 export default function ContractPage() {
   const { id: eventId } = useParams<{ id: string }>()
   const router = useRouter()
@@ -77,7 +80,7 @@ export default function ContractPage() {
     setAddons((prev) => prev.filter((_, i) => i !== index))
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: { preventDefault(): void }) {
     e.preventDefault()
     setSubmitting(true)
     setError(null)
@@ -133,7 +136,7 @@ export default function ContractPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96 text-sm text-gray-400">
+      <div className="flex items-center justify-center h-96 text-sm text-[#4a5580]">
         Loading...
       </div>
     )
@@ -143,22 +146,22 @@ export default function ContractPage() {
     <div className="max-w-2xl mx-auto p-6">
       <button
         onClick={() => router.push(`/dashboard/events/${eventId}`)}
-        className="text-sm text-gray-400 hover:text-gray-600 transition-colors mb-6 flex items-center gap-1"
+        className="text-sm text-[#00fff9] hover:text-[#00e0e0] transition-colors mb-6 flex items-center gap-1"
       >
         ← Back to event
       </button>
 
-      <h1 className="text-xl font-semibold text-gray-900 mb-6">
+      <h1 className="text-xl font-semibold text-[#c8d0f0] mb-6">
         {contractId ? 'Edit Contract' : 'Create Contract'}
       </h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="bg-white border border-gray-100 rounded-xl divide-y divide-gray-100">
+        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm divide-y divide-[#1e1e4a]">
 
           {/* Package */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Package <span className="text-red-400">*</span>
+            <label className={labelClass}>
+              Package <span className="text-[#ff2d78]">*</span>
             </label>
             <input
               type="text"
@@ -166,17 +169,17 @@ export default function ContractPage() {
               value={form.package}
               onChange={(e) => setField('package', e.target.value)}
               placeholder="e.g. Gold DJ Package"
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             />
           </div>
 
           {/* Base price */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Base price <span className="text-red-400">*</span>
+            <label className={labelClass}>
+              Base price <span className="text-[#ff2d78]">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#4a5580]">$</span>
               <input
                 type="number"
                 required
@@ -184,7 +187,7 @@ export default function ContractPage() {
                 step="0.01"
                 value={form.base_price}
                 onChange={(e) => setField('base_price', e.target.value)}
-                className="w-full border border-gray-200 rounded-md pl-7 pr-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`${inputClass} pl-7`}
               />
             </div>
           </div>
@@ -192,17 +195,17 @@ export default function ContractPage() {
           {/* Addons */}
           <div className="px-5 py-4">
             <div className="flex items-center justify-between mb-3">
-              <label className="text-xs font-medium text-gray-400 uppercase tracking-wide">Add-ons</label>
+              <label className={labelClass + ' mb-0'}>Add-ons</label>
               <button
                 type="button"
                 onClick={addAddon}
-                className="text-xs text-blue-600 hover:text-blue-800 transition-colors"
+                className="text-xs text-[#00fff9] hover:text-[#00e0e0] transition-colors"
               >
                 + Add line item
               </button>
             </div>
             {addons.length === 0 ? (
-              <p className="text-sm text-gray-400">No add-ons.</p>
+              <p className="text-sm text-[#4a5580]">No add-ons.</p>
             ) : (
               <div className="space-y-2">
                 {addons.map((addon, i) => (
@@ -212,10 +215,10 @@ export default function ContractPage() {
                       placeholder="Description"
                       value={addon.description}
                       onChange={(e) => updateAddon(i, 'description', e.target.value)}
-                      className="flex-1 border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={inputClass}
                     />
-                    <div className="relative w-28">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">$</span>
+                    <div className="relative w-28 shrink-0">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#4a5580]">$</span>
                       <input
                         type="number"
                         min="0"
@@ -223,13 +226,13 @@ export default function ContractPage() {
                         placeholder="0"
                         value={addon.price}
                         onChange={(e) => updateAddon(i, 'price', e.target.value)}
-                        className="w-full border border-gray-200 rounded-md pl-7 pr-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className={`${inputClass} pl-7`}
                       />
                     </div>
                     <button
                       type="button"
                       onClick={() => removeAddon(i)}
-                      className="text-gray-400 hover:text-red-500 transition-colors text-lg leading-none"
+                      className="text-[#4a5580] hover:text-[#ff2d78] transition-colors text-lg leading-none shrink-0"
                     >
                       ✕
                     </button>
@@ -240,18 +243,18 @@ export default function ContractPage() {
           </div>
 
           {/* Total (calculated) */}
-          <div className="px-5 py-4 bg-gray-50 flex justify-between items-center">
-            <span className="text-sm font-medium text-gray-700">Total</span>
-            <span className="text-sm font-semibold text-gray-900">${totalPrice.toLocaleString()}</span>
+          <div className="px-5 py-4 bg-[#080812] flex justify-between items-center">
+            <span className="text-sm font-medium text-[#8890b0] uppercase tracking-wide">Total</span>
+            <span className="text-sm font-semibold text-[#00fff9]">${totalPrice.toLocaleString()}</span>
           </div>
 
           {/* Balance due */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Balance due <span className="text-red-400">*</span>
+            <label className={labelClass}>
+              Balance due <span className="text-[#ff2d78]">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#4a5580]">$</span>
               <input
                 type="number"
                 required
@@ -259,23 +262,23 @@ export default function ContractPage() {
                 step="0.01"
                 value={form.balance_due}
                 onChange={(e) => setField('balance_due', e.target.value)}
-                className="w-full border border-gray-200 rounded-md pl-7 pr-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`${inputClass} pl-7`}
               />
             </div>
           </div>
 
           {/* Deposit paid */}
           <div className="px-5 py-4 flex items-center justify-between">
-            <label className="text-sm font-medium text-gray-700">Deposit paid</label>
+            <label className="text-sm font-medium text-[#8890b0]">Deposit paid</label>
             <button
               type="button"
               onClick={() => setField('deposit_paid', !form.deposit_paid)}
               className={`relative inline-flex h-5 w-9 rounded-full transition-colors ${
-                form.deposit_paid ? 'bg-blue-600' : 'bg-gray-200'
+                form.deposit_paid ? 'bg-[#00fff9]' : 'bg-[#1e1e4a]'
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 rounded-full bg-white shadow transform transition-transform mt-0.5 ${
+                className={`inline-block h-4 w-4 rounded-full bg-[#080812] shadow transform transition-transform mt-0.5 ${
                   form.deposit_paid ? 'translate-x-4' : 'translate-x-0.5'
                 }`}
               />
@@ -283,20 +286,20 @@ export default function ContractPage() {
           </div>
         </div>
 
-        {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
+        {error && <p className="mt-4 text-sm text-[#ff2d78]">{error}</p>}
 
         <div className="flex justify-end gap-3 mt-6">
           <button
             type="button"
             onClick={() => router.push(`/dashboard/events/${eventId}`)}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            className="px-4 py-2 text-sm text-[#8890b0] hover:text-[#c8d0f0] transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="px-4 py-2 text-sm bg-[#00fff9] text-[#080812] font-semibold rounded-sm hover:bg-[#00e0e0] disabled:opacity-50 transition-colors"
           >
             {submitting ? 'Saving...' : contractId ? 'Save changes' : 'Create contract'}
           </button>

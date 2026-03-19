@@ -29,6 +29,9 @@ function labelFor(value: string) {
   return value.replace('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
+const inputClass = "w-full border border-[#1e1e4a] rounded-sm px-3 py-2 text-sm text-[#c8d0f0] bg-[#080812] placeholder:text-[#4a5580] focus:outline-none focus:ring-2 focus:ring-[#00fff9]/50 focus:border-[#00fff9]"
+const labelClass = "block text-xs font-medium text-[#8890b0] uppercase tracking-wide mb-2"
+
 export default function EditEventPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
@@ -94,7 +97,7 @@ export default function EditEventPage() {
     })
   }, [id])
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: { preventDefault(): void }) {
     e.preventDefault()
     setSubmitting(true)
     setError(null)
@@ -131,7 +134,7 @@ export default function EditEventPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96 text-sm text-gray-400">
+      <div className="flex items-center justify-center h-96 text-sm text-[#4a5580]">
         Loading event...
       </div>
     )
@@ -139,7 +142,7 @@ export default function EditEventPage() {
 
   if (notFound) {
     return (
-      <div className="flex items-center justify-center h-96 text-sm text-gray-400">
+      <div className="flex items-center justify-center h-96 text-sm text-[#4a5580]">
         Event not found.
       </div>
     )
@@ -149,27 +152,23 @@ export default function EditEventPage() {
     <div className="max-w-3xl mx-auto p-6">
       <button
         onClick={() => router.push(`/dashboard/events/${id}`)}
-        className="text-sm text-gray-400 hover:text-gray-600 transition-colors mb-6 flex items-center gap-1"
+        className="text-sm text-[#00fff9] hover:text-[#00e0e0] transition-colors mb-6 flex items-center gap-1"
       >
         ← Back to event
       </button>
 
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-semibold text-gray-900">Edit Event</h1>
-      </div>
+      <h1 className="text-xl font-semibold text-[#c8d0f0] mb-6">Edit Event</h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="bg-white border border-gray-100 rounded-xl divide-y divide-gray-100">
+        <div className="bg-[#0d0d24] border border-[#1e1e4a] rounded-sm divide-y divide-[#1e1e4a]">
 
           {/* Client */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Client
-            </label>
+            <label className={labelClass}>Client</label>
             <select
               value={form.client_id}
               onChange={(e) => set('client_id', e.target.value)}
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             >
               <option value="">— No client —</option>
               {clients.map((c) => (
@@ -180,29 +179,29 @@ export default function EditEventPage() {
 
           {/* Title */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Event title <span className="text-red-400">*</span>
+            <label className={labelClass}>
+              Event title <span className="text-[#ff2d78]">*</span>
             </label>
             <input
               type="text"
               required
               value={form.title}
               onChange={(e) => set('title', e.target.value)}
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             />
           </div>
 
           {/* Event type + Status */}
           <div className="px-5 py-4 grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Event type <span className="text-red-400">*</span>
+              <label className={labelClass}>
+                Event type <span className="text-[#ff2d78]">*</span>
               </label>
               <select
                 required
                 value={form.event_type}
                 onChange={(e) => set('event_type', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               >
                 <option value="">Select type</option>
                 {EVENT_TYPES.map((t) => (
@@ -211,13 +210,11 @@ export default function EditEventPage() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Status
-              </label>
+              <label className={labelClass}>Status</label>
               <select
                 value={form.status}
                 onChange={(e) => set('status', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               >
                 {STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>{labelFor(s)}</option>
@@ -229,13 +226,11 @@ export default function EditEventPage() {
           {/* Staffing status + Timeline status */}
           <div className="px-5 py-4 grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Staffing status
-              </label>
+              <label className={labelClass}>Staffing status</label>
               <select
                 value={form.staffing_status}
                 onChange={(e) => set('staffing_status', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               >
                 {STAFFING_STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>{labelFor(s)}</option>
@@ -243,13 +238,11 @@ export default function EditEventPage() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Timeline status
-              </label>
+              <label className={labelClass}>Timeline status</label>
               <select
                 value={form.timeline_status}
                 onChange={(e) => set('timeline_status', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               >
                 {TIMELINE_STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>{labelFor(s)}</option>
@@ -261,98 +254,98 @@ export default function EditEventPage() {
           {/* Event date + End date */}
           <div className="px-5 py-4 grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Event date <span className="text-red-400">*</span>
+              <label className={labelClass}>
+                Event date <span className="text-[#ff2d78]">*</span>
               </label>
               <input
                 type="date"
                 required
                 value={form.event_date}
                 onChange={(e) => set('event_date', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                End date <span className="text-gray-300 font-normal normal-case">(optional)</span>
+              <label className={labelClass}>
+                End date <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
               </label>
               <input
                 type="date"
                 value={form.end_date}
                 onChange={(e) => set('end_date', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Location */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Location <span className="text-red-400">*</span>
+            <label className={labelClass}>
+              Location <span className="text-[#ff2d78]">*</span>
             </label>
             <input
               type="text"
               required
               value={form.location}
               onChange={(e) => set('location', e.target.value)}
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClass}
             />
           </div>
 
           {/* Contracted start + end */}
           <div className="px-5 py-4 grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Contracted start <span className="text-gray-300 font-normal normal-case">(optional)</span>
+              <label className={labelClass}>
+                Contracted start <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
               </label>
               <input
                 type="time"
                 value={form.contracted_start}
                 onChange={(e) => set('contracted_start', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-                Contracted end <span className="text-gray-300 font-normal normal-case">(optional)</span>
+              <label className={labelClass}>
+                Contracted end <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
               </label>
               <input
                 type="time"
                 value={form.contracted_end}
                 onChange={(e) => set('contracted_end', e.target.value)}
-                className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={inputClass}
               />
             </div>
           </div>
 
           {/* Notes */}
           <div className="px-5 py-4">
-            <label className="block text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
-              Notes <span className="text-gray-300 font-normal normal-case">(optional)</span>
+            <label className={labelClass}>
+              Notes <span className="text-[#4a5580] font-normal normal-case">(optional)</span>
             </label>
             <textarea
               rows={4}
               value={form.notes}
               onChange={(e) => set('notes', e.target.value)}
-              className="w-full border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className={`${inputClass} resize-none`}
             />
           </div>
         </div>
 
-        {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
+        {error && <p className="mt-4 text-sm text-[#ff2d78]">{error}</p>}
 
         <div className="flex justify-end gap-3 mt-6">
           <button
             type="button"
             onClick={() => router.push(`/dashboard/events/${id}`)}
-            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            className="px-4 py-2 text-sm text-[#8890b0] hover:text-[#c8d0f0] transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="px-4 py-2 text-sm bg-[#00fff9] text-[#080812] font-semibold rounded-sm hover:bg-[#00e0e0] disabled:opacity-50 transition-colors"
           >
             {submitting ? 'Saving...' : 'Save changes'}
           </button>
